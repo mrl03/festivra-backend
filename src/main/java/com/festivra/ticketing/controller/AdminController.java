@@ -67,7 +67,7 @@ public class AdminController {
     
     reservationRepo.deleteAllByEvent(event);
         eventRepo.deleteById(id);
-        return ResponseEntity.ok("Event deleted");
+        return ResponseEntity.ok(Collections.singletonMap("message", "Evento Eliminado"));
     }
     
     @GetMapping("/users")
