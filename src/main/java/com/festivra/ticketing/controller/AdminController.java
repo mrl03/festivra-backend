@@ -63,7 +63,7 @@ public class AdminController {
      @DeleteMapping("/events/{id}")
     @Transactional
     public ResponseEntity<?> deleteEvent(@PathVariable Long id) {
-        Event event = eventRepo.findById(id).orElseThrow(() -> new RuntimeException("Event not found"));
+        Event event = eventRepo.findById(id).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
     
     reservationRepo.deleteAllByEvent(event);
         eventRepo.deleteById(id);
@@ -93,11 +93,11 @@ public ResponseEntity<?> deleteUser(@PathVariable Long id) {
     @PutMapping("/users/{id}/role")
     public ResponseEntity<?> updateRole(@PathVariable Long id, @RequestParam String role) {
         User user = userRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     
         Optional<Role> roleOpt = roleRepo.findByName("ROLE_" + role.toUpperCase());
         if (roleOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Role not found");
+            return ResponseEntity.badRequest().body("Rol no encontrado");
         }
     
         user.getRoles().clear();
@@ -116,7 +116,7 @@ public List<Reservation> getAllReservations() {
 @Transactional
 public ResponseEntity<?> deleteReservation(@PathVariable Long id) {
     Reservation reservation = reservationRepo.findById(id)
-        .orElseThrow(() -> new RuntimeException("Reservation not found"));
+        .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
 
     Event event = reservation.getEvent();
     if (event.getReserved() > 0) {

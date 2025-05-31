@@ -22,7 +22,7 @@ public class UserController {
         String email = authentication.getName();
 
         User user = userRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         return ResponseEntity.ok(Map.of(
                 "email", user.getEmail(),
